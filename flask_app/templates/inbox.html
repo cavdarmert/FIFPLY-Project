@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Message Inbox</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="animate-charcter">FIFPLY - FREE ITEMS FROM PEOPLE LIKE YOU</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>Message Inbox Page</h1>
+        <div class="d-flex justify-content-between">
+            <h2>All Messages</h2>
+            
+            <div>
+                <div>
+                    <h3><strong>Welcome {{ user.first_name }} {{ user.last_name }}</strong></h3> 
+
+                </div>
+                <a class="btn btn-primary" href="/dashboard">BACK TO DASHBOARD</a>
+                <a class="btn btn-primary" href="/inbox">INBOX</a>
+                <a class="btn btn-primary" href="/logout">LOGOUT</a>     
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-danger">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Message Title</th>
+                    <th>Message Content</th>
+                    <th>Message Sent by</th>
+                    <th>Message Sent on</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for message in messages %}
+                {% if message.receiver_id == user.id %}
+                <tr>
+                    <td>{{ message.message_title }}</td>
+                    <td>{{ message.content }}</td>
+                    <td>{{ message.owner.first_name }} {{ message.owner.last_name }}</td>
+                    <td>{{ message.created_at }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/messages/{{message.id}}/view">VIEW</a>
+                        <a class="btn btn-primary" href="/messages/new/{{message.owner.id}}">REPLY</a>
+                        <a class="btn btn-primary" href="/messages/chatbox/{{message.owner.id}}">CHATBOX</a>
+
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

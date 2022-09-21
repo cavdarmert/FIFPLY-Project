@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Show The Message</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="animate-charcter">FIFPLY - FREE ITEMS FROM PEOPLE LIKE YOU</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <h1>Message Details</h1>
+        <div>
+            <div class=" d-flex justify-content-end">
+                <h3><strong>Welcome {{ user.first_name }} {{ user.last_name }}</strong></h3>
+                <a class="btn btn-primary" href="/dashboard">BACK TO DASHBOARD</a>
+                <a class="btn btn-primary" href="/inbox">INBOX</a>
+                <a class="btn btn-primary" href="/logout">LOGOUT</a>     
+            </div>
+        </div>
+    <div class="container">
+        <h3>Message Title: {{ message.message_title }}</h2>
+        <h3>Message Content: {{ message.content }}</h3>
+        <h3>Message Sent by: {{ message.owner.first_name }} {{ message.owner.last_name }}</h3>
+        <h3>Message Sent on: {{ message.created_at }}</h3>
+
+    </div>
+    <div>
+        <a class="btn btn-primary" href="/messages/new/{{message.owner.id}}">REPLY</a>
+    </div>
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
